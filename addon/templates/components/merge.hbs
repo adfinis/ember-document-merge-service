@@ -1,0 +1,29 @@
+{{#if error}}
+  <p>{{error}}</p>
+{{/if}}
+
+<form class="uk-form-stacked" onsubmit={{action "mergeTemplate"}}>
+  <p>
+    <label class="uk-form-label" for="form-template">
+      {{~t "merge.label"~}}
+    </label>
+
+    <div class="uk-form-controls">
+      <select class="uk-select" name="template" id="form-template">
+        <option value="">{{t "merge.choose"}}</option>
+
+        {{#each templates as |template|}}
+          <option value={{template.slug}}>
+            {{~template.description~}}
+          </option>
+        {{/each}}
+      </select>
+    </div>
+  </p>
+
+  {{uk-button
+    color="primary"
+    label=(t "merge.submit")
+    type="submit"
+  }}
+</form>

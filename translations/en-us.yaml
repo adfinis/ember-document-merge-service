@@ -1,0 +1,18 @@
+manage:
+  no-templates: "No templates available."
+  upload: "Upload"
+  slug: "Slug"
+  label: "Label"
+  file: "File"
+  select: "Select file"
+
+  delete:
+    heading: "Attention"
+    message: "Do you really want to delete the template \"{file}\"?"
+    submit: "Delete"
+    cancel: "Cancel"
+
+merge:
+  label: "Template"
+  choose: "Choose template"
+  submit: "Merge"
