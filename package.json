@@ -1,13 +1,17 @@
 {
   "name": "ember-document-merge-service",
   "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "Ember components for document-merge-service.",
   "keywords": [
     "ember-addon"
   ],
-  "repository": "",
+  "repository": "github:adfinis-sygroup/ember-document-merge-service",
   "license": "MIT",
-  "author": "",
+  "author": {
+    "name": "Adfinis SyGroup AG",
+    "email": "info@adfinis-sygroup.ch",
+    "url": "https://adfinis-sygroup.ch/"
+  },
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -50,9 +54,12 @@
     "ember-source": "~3.7.0",
     "ember-source-channel-url": "^1.1.0",
     "ember-try": "^1.0.0",
+    "eslint-config-prettier": "4.1.0",
     "eslint-plugin-ember": "^5.2.0",
     "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-prettier": "3.0.1",
     "loader.js": "^4.7.0",
+    "prettier": "1.16.4",
     "qunit-dom": "^0.8.0"
   },
   "engines": {

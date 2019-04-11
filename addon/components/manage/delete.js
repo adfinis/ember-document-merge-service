@@ -1,7 +1,7 @@
-import Component from '@ember/component';
+import Component from "@ember/component";
 import { inject as service } from "@ember/service";
 
-import layout from '../../templates/components/manage/delete';
+import layout from "../../templates/components/manage/delete";
 
 export default Component.extend({
   layout,

@@ -1,9 +1,9 @@
-import Component from '@ember/component';
+import Component from "@ember/component";
 import { inject as service } from "@ember/service";
 import { saveAs } from "file-saver";
 import { task } from "ember-concurrency";
 
-import layout from '../templates/components/merge';
+import layout from "../templates/components/merge";
 
 export default Component.extend({
   layout,

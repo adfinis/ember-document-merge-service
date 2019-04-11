@@ -1,7 +1,7 @@
-import Component from '@ember/component';
+import Component from "@ember/component";
 import { inject as service } from "@ember/service";
 
-import layout from '../../templates/components/manage/upload';
+import layout from "../../templates/components/manage/upload";
 
 export default Component.extend({
   layout,
