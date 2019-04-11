@@ -16,7 +16,7 @@ export default Component.extend({
   data: null,
   template: null,
 
-  async init() {
+  init() {
     this._super(...arguments);
     this.fetchTemplates.perform();
   },
