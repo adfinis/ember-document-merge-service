@@ -27,13 +27,15 @@ export default function() {
     } else {
       data = JSON.parse(body);
     }
+    data.template = `${data.slug}.docx`;
 
-    return schema.templates.create(data);
+    const template = schema.templates.create(data);
+    return { results: template };
   });
 
   this.post("/template/:slug/merge", (schema, request) => {
     const slug = request.params.slug;
     const file = schema.templates.findBy({ slug }).file;
-    return new Response(200, file, file.type);
+    return new Response(200, { "Content-Type": file.type }, file);
   });
 }

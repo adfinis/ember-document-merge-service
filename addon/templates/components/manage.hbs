@@ -1,0 +1,10 @@
+{{manage-files/delete 
+  templates=templates
+  on-fetch=(action "setTemplates")
+  on-delete=(action "removeTemplate")
+}}
+
+{{manage-files/upload 
+  templates=templates
+  on-upload=(action "addTemplate")
+}}

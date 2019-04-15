@@ -29,7 +29,7 @@ export default Component.extend({
 
       try {
         const response = await this.ajax.post("/template/", options);
-        this.templates.pushObject(response);
+        this.get("on-upload")(response.results);
 
         // Clear the form on success.
         form.reset();

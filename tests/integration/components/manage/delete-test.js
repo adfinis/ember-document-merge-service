@@ -3,16 +3,34 @@ import { setupRenderingTest } from "ember-qunit";
 import { click, render, settled } from "@ember/test-helpers";
 import hbs from "htmlbars-inline-precompile";
 import setupMirage from "ember-cli-mirage/test-support/setup-mirage";
+import { A } from "@ember/array";
 
 module("Integration | Component | manage/delete", function(hooks) {
   setupRenderingTest(hooks);
   setupMirage(hooks);
 
+  hooks.beforeEach(function() {
+    this.set("templates", A());
+    this.set("onFetch", templates => this.set("templates", A(templates)));
+    this.set("onDelete", template =>
+      this.set("templates", A(this.templates.without(template)))
+    );
+  });
+
   test("it renders", async function(assert) {
     await render(hbs`{{manage-files/delete}}`);
     assert.ok(this.element);
+  });
 
+  test("it list uploaded templates", async function(assert) {
+    await render(hbs`
+      {{manage-files/delete 
+        templates=templates 
+        on-fetch=onFetch
+      }}
+    `);
     await settled();
+
     assert.dom(".uk-list li").exists({ count: 3 });
   });
 
@@ -20,7 +38,14 @@ module("Integration | Component | manage/delete", function(hooks) {
     const ajax = this.owner.lookup("service:ajax");
     const count_before = (await ajax.request("/template/")).results.length;
 
-    await render(hbs`{{manage-files/delete}}`);
+    await render(hbs`
+      {{manage-files/delete
+        templates=templates
+        on-fetch=onFetch
+        on-delete=onDelete
+      }}
+    `);
+    await settled();
 
     // Cancel deletion
     await click(".uk-list li:first-child button");

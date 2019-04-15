@@ -54,10 +54,12 @@ export default Component.extend({
 
       request.responseType = "blob";
 
-      request.addEventListener("load", function(event) {
-        //{ target: { response } }
-        const response = event.target.response;
-        saveAs(response, filename);
+      request.addEventListener("load", ({ target: { response } }) => {
+        try {
+          saveAs(response, filename);
+        } catch (error) {
+          this.set("error", error.message);
+        }
       });
 
       request.addEventListener("error", error => {

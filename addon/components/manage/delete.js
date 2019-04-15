@@ -1,6 +1,5 @@
 import Component from "@ember/component";
 import { inject as service } from "@ember/service";
-import { A } from "@ember/array";
 
 import layout from "../../templates/components/manage/delete";
 
@@ -23,8 +22,13 @@ export default Component.extend({
     this._super(...arguments);
 
     try {
+      const onFetch = this.get("on-fetch");
       const response = await this.ajax.request("/template/");
-      this.set("templates", A(response.results));
+      const templates = response.results;
+
+      if (onFetch) {
+        onFetch(templates);
+      }
     } catch (error) {
       this.set("error", error);
     }
@@ -40,8 +44,12 @@ export default Component.extend({
       this.set("error", null);
 
       try {
+        const onDelete = this.get("on-delete");
         await this.ajax.del(`/template/${template.slug}`);
-        this.set("templates", this.templates.without(template));
+
+        if (onDelete) {
+          onDelete(template);
+        }
       } catch (error) {
         this.set("error", error);
       }

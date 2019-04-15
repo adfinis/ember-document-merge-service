@@ -1,6 +1,6 @@
 import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
-import { fillIn, click, render } from "@ember/test-helpers";
+import { fillIn, click, render, settled } from "@ember/test-helpers";
 import hbs from "htmlbars-inline-precompile";
 import { A } from "@ember/array";
 import setupMirage from "ember-cli-mirage/test-support/setup-mirage";
@@ -8,6 +8,14 @@ import setupMirage from "ember-cli-mirage/test-support/setup-mirage";
 module("Integration | Component | manage/upload", function(hooks) {
   setupRenderingTest(hooks);
   setupMirage(hooks);
+
+  hooks.beforeEach(function() {
+    this.set("templates", A());
+    this.set("onFetch", templates => this.set("templates", A(templates)));
+    this.set("onAdd", template =>
+      this.set("templates", A([...this.templates, template]))
+    );
+  });
 
   test("it renders", async function(assert) {
     await render(hbs`{{manage-files/upload}}`);
@@ -18,9 +26,14 @@ module("Integration | Component | manage/upload", function(hooks) {
     const ajax = this.owner.lookup("service:ajax");
     const count_before = (await ajax.request("/template/")).results.length;
 
-    this.set("templates", A());
-
-    await render(hbs`{{manage-files/upload templates=templates}}`);
+    await render(hbs`
+      {{manage-files/upload 
+        templates=templates
+        on-fetch=onFetch
+        on-upload=onAdd
+      }}
+    `);
+    await settled();
 
     await fillIn("[name=slug]", "t1");
     await fillIn("[name=description]", "Template 1");
