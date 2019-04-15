@@ -16,3 +16,6 @@ merge:
   label: "Template"
   choose: "Choose template"
   submit: "Merge"
+
+dummy:
+  title: "Ember Document Merge Service"

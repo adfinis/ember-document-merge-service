@@ -54,7 +54,9 @@ export default Component.extend({
 
       request.responseType = "blob";
 
-      request.addEventListener("load", ({ target: { response } }) => {
+      request.addEventListener("load", function(event) {
+        //{ target: { response } }
+        const response = event.target.response;
         saveAs(response, filename);
       });
 

@@ -1,5 +1,6 @@
 import Component from "@ember/component";
 import { inject as service } from "@ember/service";
+import { A } from "@ember/array";
 
 import layout from "../../templates/components/manage/delete";
 
@@ -10,6 +11,12 @@ export default Component.extend({
 
   error: null,
   templates: null,
+
+  /**
+   * The selected property holds the currently selected template
+   * to be used in the modal dialog before deleting a template.
+   * @property selected
+   */
   selected: null,
 
   async init() {
@@ -17,9 +24,9 @@ export default Component.extend({
 
     try {
       const response = await this.ajax.request("/template/");
-      this.set("templates", response.results);
+      this.set("templates", A(response.results));
     } catch (error) {
-      this.set("templates", []);
+      this.set("error", error);
     }
   },
 
@@ -30,6 +37,7 @@ export default Component.extend({
     async submitDelete() {
       const template = this.selected;
       this.set("selected", null);
+      this.set("error", null);
 
       try {
         await this.ajax.del(`/template/${template.slug}`);

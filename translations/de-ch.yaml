@@ -16,3 +16,6 @@ merge:
   label: "Vorlage"
   choose: "Vorlage auswählen"
   submit: "Exportieren"
+
+dummy:
+  title: "Ember Document Merge Service"
