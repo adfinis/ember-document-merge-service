@@ -1,0 +1,21 @@
+manage:
+  no-templates: "Es sind keine Vorlagen hinterlegt."
+  upload: "Hochladen"
+  slug: "Slug"
+  label: "Beschriftung"
+  file: "Datei"
+  select: "Datei auswählen"
+
+  delete:
+    heading: "Achtung"
+    message: "Wollen Sie die Vorlage \"{file}\" wirklich löschen?"
+    submit: "Löschen"
+    cancel: "Abbrechen"
+
+merge:
+  label: "Vorlage"
+  choose: "Vorlage auswählen"
+  submit: "Exportieren"
+
+dummy:
+  title: "Ember Document Merge Service"

@@ -1,0 +1,37 @@
+{{#if error}}
+  <p>{{error}}</p>
+{{/if}}
+
+{{#if (not (is-empty templates))}}
+  {{#uk-list striped=true as |list|}}
+    {{#each templates as |template|}}
+      {{#list.item}}
+        <a
+          href={{template.template}}
+          target="_blank"
+          rel="noopener"
+        >
+          {{~template.description~}}
+        </a>
+
+        <button
+          uk-icon="icon: close"
+          class="uk-icon-button" 
+          type="button"
+          {{action "requestDelete" template}}
+        ></button>
+      {{/list.item}}
+    {{/each}}
+  {{/uk-list}}
+{{else}}
+  <p>{{t "manage.no-templates"}}</p>
+{{/if}}
+
+{{#uk-modal visible=(not-eq selected null)}}
+  <strong class="uk-modal-title">{{t "manage.delete.heading"}}</strong>
+  <p>{{t "manage.delete.message" file=selected.description}}</p>
+  <p class="uk-text-right">
+    {{uk-button color="primary" label=(t "manage.delete.submit") on-click=(action "submitDelete" selected)}}
+    {{uk-button label=(t "manage.delete.cancel") on-click=(action "cancelDelete")}}
+  </p>
+{{/uk-modal}}
