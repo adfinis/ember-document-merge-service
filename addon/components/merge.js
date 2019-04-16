@@ -47,7 +47,8 @@ export default Component.extend({
 
       request.open(
         "POST",
-        `${this.ajax.host}${this.ajax.namespace}/template/${slug}/merge/`
+        `${this.ajax.host || ""}${this.ajax.namespace ||
+          ""}/template/${slug}/merge/`
       );
 
       request.setRequestHeader("Content-Type", this.ajax.contentType);
