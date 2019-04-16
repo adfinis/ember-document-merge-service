@@ -7,6 +7,7 @@ module.exports = {
     ecmaVersion: 2017,
     sourceType: "module"
   },
+  parser: "babel-eslint",
   plugins: ["ember", "prettier"],
   extends: [
     "eslint:recommended",
@@ -34,7 +35,8 @@ module.exports = {
         "addon/**",
         "addon-test-support/**",
         "app/**",
-        "tests/dummy/app/**"
+        "tests/dummy/app/**",
+        "tests/dummy/mirage/**"
       ],
       parserOptions: {
         sourceType: "script",
