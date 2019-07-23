@@ -35,5 +35,8 @@ The delete component provides a list with the existing templates. Each templates
 #### Merge
 The merge component provides a dropdown to select from the existing templates which can then be merged with a data object.
 
+## Contributing
+See the [Contributing](CONTRIBUTING.md) guide for details.
+
 ## License
 This project is licensed under the [MIT License](LICENSE.md).
