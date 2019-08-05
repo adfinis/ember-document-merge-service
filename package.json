@@ -35,7 +35,7 @@
     "file-saver": "2.0.1"
   },
   "devDependencies": {
-    "@ember/jquery": "0.5.2",
+    "@ember/jquery": "0.6.1",
     "@ember/optional-features": "0.6.4",
     "babel-eslint": "10.0.1",
     "broccoli-asset-rev": "2.7.0",
