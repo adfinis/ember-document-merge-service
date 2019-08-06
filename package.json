@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@ember/jquery": "0.6.1",
-    "@ember/optional-features": "0.6.4",
+    "@ember/optional-features": "0.7.0",
     "babel-eslint": "10.0.2",
     "broccoli-asset-rev": "2.7.0",
     "ember-ajax": "5.0.0",
