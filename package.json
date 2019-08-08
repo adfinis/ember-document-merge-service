@@ -64,7 +64,7 @@
     "ember-truth-helpers": "2.1.0",
     "ember-try": "1.2.1",
     "ember-uikit": "0.8.2",
-    "eslint-config-prettier": "4.1.0",
+    "eslint-config-prettier": "6.0.0",
     "eslint-plugin-ember": "5.4.0",
     "eslint-plugin-node": "9.1.0",
     "eslint-plugin-prettier": "2.6.0",
