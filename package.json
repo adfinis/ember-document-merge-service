@@ -65,7 +65,7 @@
     "ember-uikit": "0.8.2",
     "eslint": "6.1.0",
     "eslint-config-prettier": "6.0.0",
-    "eslint-plugin-ember": "6.8.2",
+    "eslint-plugin-ember": "6.9.0",
     "eslint-plugin-node": "9.1.0",
     "eslint-plugin-prettier": "2.6.0",
     "loader.js": "4.7.0",
