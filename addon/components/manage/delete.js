@@ -1,5 +1,6 @@
 import Component from "@ember/component";
 import { inject as service } from "@ember/service";
+import naturalSort from "javascript-natural-sort";
 
 import layout from "../../templates/components/manage/delete";
 
@@ -24,7 +25,9 @@ export default Component.extend({
     try {
       const onFetch = this.get("on-fetch");
       const response = await this.ajax.request("/template/");
-      const templates = response.results;
+      const templates = response.results.sort((a, b) =>
+        naturalSort(a.description, b.description)
+      );
 
       if (onFetch) {
         onFetch(templates);

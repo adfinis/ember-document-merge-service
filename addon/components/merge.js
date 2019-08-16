@@ -2,6 +2,7 @@ import Component from "@ember/component";
 import { inject as service } from "@ember/service";
 import { saveAs } from "file-saver";
 import { task } from "ember-concurrency";
+import naturalSort from "javascript-natural-sort";
 
 import layout from "../templates/components/merge";
 
@@ -24,7 +25,10 @@ export default Component.extend({
   fetchTemplates: task(function*() {
     try {
       const response = yield this.ajax.request("/template/");
-      this.set("templates", response.results);
+      const templates = response.results.sort((a, b) =>
+        naturalSort(a.description, b.description)
+      );
+      this.set("templates", templates);
     } catch (error) {
       this.set("templates", []);
     }

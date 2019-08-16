@@ -1,6 +1,6 @@
 export default [
   {
-    description: "Test 1",
+    description: "Test 100",
     slug: "t1",
     engine: "docx-template",
     file: new File(["{{ test }}"], "t1.docx", {
@@ -8,7 +8,7 @@ export default [
     })
   },
   {
-    description: "Test 2",
+    description: "Test 1",
     slug: "t2",
     engine: "docx-template",
     file: new File(["{{ test }}"], "t2.docx", {
@@ -16,7 +16,7 @@ export default [
     })
   },
   {
-    description: "Test 3",
+    description: "Test 10",
     slug: "t3",
     engine: "docx-template",
     file: new File(["{{ test }}"], "t3.docx", {
