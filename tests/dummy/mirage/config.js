@@ -30,7 +30,7 @@ export default function() {
     data.template = `${data.slug}.docx`;
 
     const template = schema.templates.create(data);
-    return { results: template };
+    return template.attrs;
   });
 
   this.post("/template/:slug/merge", (schema, request) => {
