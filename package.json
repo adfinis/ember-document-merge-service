@@ -24,6 +24,7 @@
     "lint:hbs": "ember-template-lint .",
     "lint:js": "eslint .",
     "start": "ember serve",
+    "start-proxy": "ember serve --proxy=http://localhost:8888",
     "test": "ember test",
     "test:all": "ember try:each"
   },

@@ -1,0 +1,39 @@
+version: '3'
+services:
+
+  document-merge-service:
+    image: adfinissygroup/document-merge-service:latest
+    volumes:
+      - document-merge-service:/var/lib/document-merge-service/media
+    environment:
+      - DATABASE_ENGINE=django.db.backends.postgresql
+      - DATABASE_HOST=postgres
+      - DATABASE_NAME=dms
+      - DATABASE_USER=dms
+      - DATABASE_PASSWORD=dms
+      - UNOCONV_URL=http://unoconv:3000
+      - DOCXTEMPLATE_JINJA_EXTENSIONS=jinja2.ext.do,jinja2.ext.loopcontrols
+      - LANGUAGE_CODE=de-ch
+      - CORS_ORIGIN_ALLOW_ALL=True
+      - ENV=dev
+    ports:
+      - '8888:8000'
+    command: /bin/sh -c "wait-for-it.sh postgres:5432 -- ./manage.py migrate && uwsgi"
+
+  postgres:
+    image: postgres:10-alpine
+    environment:
+      - POSTGRES_USER=dms
+      - POSTGRES_DB=dms
+      - POSTGRES_PASSWORD=dms
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+  unoconv:
+    image: zrrrzzt/docker-unoconv-webservice:10.14.0
+    environment:
+      - SERVER_PORT=3000
+
+volumes:
+  document-merge-service:
+  postgres:
