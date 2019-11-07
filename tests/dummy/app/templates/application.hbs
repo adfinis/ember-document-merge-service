@@ -2,12 +2,22 @@
 
 {{manage-files}}
 
-{{!--
-{{manage-files/delete templates=templates}}
+<hr>
 
-{{manage-files/upload templates=templates}}
---}}
+<p>
+  <label class="uk-form-label" for="data">
+    {{t "dummy.dataLabel"}}
+  </label>
 
-{{merge-files templates=templates}}
+  <div class="uk-form-controls">
+    {{textarea
+      id="data"
+      value=input
+      change=(action "updateData")
+    }}
+  </div>
+</p>
+
+{{merge-files data=data}}
 
 {{outlet}}
