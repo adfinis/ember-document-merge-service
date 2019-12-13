@@ -26,11 +26,22 @@ jobs:
       uses: Borales/actions-yarn@master
       with: { args: 'install' }
 
+    - name: Save dependencies to articat
+      uses: actions/upload-artifact@v1
+      with:
+        name: dependencies
+        path: node_modules
+
   lint-hbs:
     name: Lint Handlebars
     needs: setup
     runs-on: [ubuntu-latest]
     steps:
+    - name: Restore dependencies from articat
+      uses: actions/download-artifact@v1
+      with:
+        name: dependencies
+
     - name: Lint Handlebars
       uses: Borales/actions-yarn@master
       with: { args: 'lint:hbs' }
@@ -40,6 +51,11 @@ jobs:
     needs: setup
     runs-on: [ubuntu-latest]
     steps:
+    - name: Restore dependencies from articat
+      uses: actions/download-artifact@v1
+      with:
+        name: dependencies
+
     - name: Lint Javascript
       uses: Borales/actions-yarn@master
       with: { args: 'lint:js' }
@@ -49,5 +65,10 @@ jobs:
     needs: [lint-hbs, lint-js]
     runs-on: [ubuntu-latest]
     steps:
+    - name: Restore dependencies from articat
+      uses: actions/download-artifact@v1
+      with:
+        name: dependencies
+
     - name: Ember tests
       uses: alexlafroscia/actions-ember-testing@v1.0.0
