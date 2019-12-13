@@ -19,28 +19,13 @@ jobs:
       uses: actions/setup-node@v1
       with: { node-version: 10.x }
 
-    - name: Checkout repository
-      uses: actions/checkout@v1
-
-    - name: Install dependencies
-      uses: Borales/actions-yarn@master
-      with: { args: 'install' }
-
-    - name: Save dependencies to articat
-      uses: actions/upload-artifact@v1
-      with:
-        name: dependencies
-        path: node_modules
-
   lint-hbs:
     name: Lint Handlebars
     needs: setup
     runs-on: [ubuntu-latest]
     steps:
-    - name: Restore dependencies from articat
-      uses: actions/download-artifact@v1
-      with:
-        name: dependencies
+    - name: Checkout repository
+      uses: actions/checkout@v1
 
     - name: Lint Handlebars
       uses: Borales/actions-yarn@master
@@ -51,10 +36,8 @@ jobs:
     needs: setup
     runs-on: [ubuntu-latest]
     steps:
-    - name: Restore dependencies from articat
-      uses: actions/download-artifact@v1
-      with:
-        name: dependencies
+    - name: Checkout repository
+      uses: actions/checkout@v1
 
     - name: Lint Javascript
       uses: Borales/actions-yarn@master
@@ -65,10 +48,12 @@ jobs:
     needs: [lint-hbs, lint-js]
     runs-on: [ubuntu-latest]
     steps:
-    - name: Restore dependencies from articat
-      uses: actions/download-artifact@v1
-      with:
-        name: dependencies
+    - name: Checkout repository
+      uses: actions/checkout@v1
+
+    - name: Install dependencies
+      uses: Borales/actions-yarn@master
+      with: { args: 'install' }
 
     - name: Ember tests
       uses: alexlafroscia/actions-ember-testing@v1.0.0
