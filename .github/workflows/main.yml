@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  setup:
+    name: Setup  environment
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Install Node
+      uses: actions/setup-node@v1
+      with: { node-version: 10.x }
+
+    - name: Checkout repository
+      uses: actions/checkout@v1
+
+    - name: Install dependencies
+      uses: Borales/actions-yarn@master
+      with: { args: 'install' }
+
+  lint-hbs:
+    name: Lint Handlebars
+    needs: setup
+    runs-on: [ubuntu-latest]
+    steps:
+    - name: Lint Handlebars
+      uses: Borales/actions-yarn@master
+      with: { args: 'lint:hbs' }
+
+  lint-js:
+    name: Lint Javascript
+    needs: setup
+    runs-on: [ubuntu-latest]
+    steps:
+    - name: Lint Javascript
+      uses: Borales/actions-yarn@master
+      with: { args: 'lint:js' }
+
+  test:
+    name: Run Ember tests
+    needs: [lint-hbs, lint-js]
+    runs-on: [ubuntu-latest]
+    steps:
+    - name: Ember tests
+      uses: alexlafroscia/actions-ember-testing@v1.0.0
