@@ -16,7 +16,7 @@
 
         <button
           uk-icon="icon: close"
-          class="uk-icon-button" 
+          class="uk-icon-button"
           type="button"
           {{action "requestDelete" template}}
         ></button>
@@ -27,11 +27,29 @@
   <p>{{t "manage.no-templates"}}</p>
 {{/if}}
 
-{{#uk-modal visible=(not-eq selected null)}}
-  <strong class="uk-modal-title">{{t "manage.delete.heading"}}</strong>
-  <p>{{t "manage.delete.message" file=selected.description}}</p>
-  <p class="uk-text-right">
-    {{uk-button color="primary" label=(t "manage.delete.submit") on-click=(action "submitDelete" selected)}}
-    {{uk-button label=(t "manage.delete.cancel") on-click=(action "cancelDelete")}}
-  </p>
+{{#uk-modal
+  visible=(not-eq selected null)
+  on-hide=(action (mut selected) null)
+  as |modal|
+}}
+  {{#modal.header}}
+    <strong class="uk-modal-title">{{t "manage.delete.heading"}}</strong>
+  {{/modal.header}}
+
+  {{#modal.body}}
+    <p>{{t "manage.delete.message" file=selected.description}}</p>
+  {{/modal.body}}
+
+  {{#modal.footer class="uk-text-right"}}
+    {{uk-button
+      label=(t "manage.delete.cancel")
+      on-click=(action "cancelDelete")
+    }}
+
+    {{uk-button
+      color="primary"
+      label=(t "manage.delete.submit")
+      on-click=(action "submitDelete" selected)
+    }}
+  {{/modal.footer}}
 {{/uk-modal}}
