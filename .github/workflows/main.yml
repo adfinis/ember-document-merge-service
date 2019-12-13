@@ -1,4 +1,4 @@
-name: CI
+name: Ember
 
 on:
   push:
@@ -10,18 +10,8 @@ on:
       - master
 
 jobs:
-  setup:
-    name: Setup  environment
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Install Node
-      uses: actions/setup-node@v1
-      with: { node-version: 10.x }
-
   lint-hbs:
     name: Lint Handlebars
-    needs: setup
     runs-on: [ubuntu-latest]
     steps:
     - name: Checkout repository
@@ -33,7 +23,6 @@ jobs:
 
   lint-js:
     name: Lint Javascript
-    needs: setup
     runs-on: [ubuntu-latest]
     steps:
     - name: Checkout repository
@@ -44,12 +33,29 @@ jobs:
       with: { args: 'lint:js' }
 
   test:
-    name: Run Ember tests
+    name: Ember test
     needs: [lint-hbs, lint-js]
     runs-on: [ubuntu-latest]
+
+    strategy:
+      matrix:
+        node: ['10', '8']
+
     steps:
+    - name: Install Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node }}
+
     - name: Checkout repository
       uses: actions/checkout@v1
+
+    - name: Install dependencies (no lockfile)
+      uses: Borales/actions-yarn@master
+      with: { args: 'install --no-lockfile' }
+
+    - name: Ember tests (floating dependencies)
+      uses: alexlafroscia/actions-ember-testing@v1.0.0
 
     - name: Install dependencies
       uses: Borales/actions-yarn@master
@@ -57,3 +63,36 @@ jobs:
 
     - name: Ember tests
       uses: alexlafroscia/actions-ember-testing@v1.0.0
+
+  try-one:
+    name: Ember try:one
+    needs: [test]
+    runs-on: [ubuntu-latest]
+
+    strategy:
+      matrix:
+        node: ['10', '8']
+        scenario:
+          - ember-lts-3.8
+          - ember-lts-3.12
+          - ember-release
+          - ember-beta
+          - ember-canary
+
+    steps:
+    - name: Install Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node }}
+
+    - name: Checkout repository
+      uses: actions/checkout@v1
+
+    - name: Install dependencies
+      uses: Borales/actions-yarn@master
+      with: { args: 'install' }
+
+    - name: Ember Scenario tests
+      uses: alexlafroscia/actions-ember-testing@v1.0.0
+      with:
+        args: try:one ${{ matrix.scenario }}
