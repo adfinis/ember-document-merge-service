@@ -17,13 +17,12 @@ export default function() {
 
   this.post("/template/", (schema, request) => {
     const body = request.requestBody;
+    let data = {};
 
-    let data;
     if (body instanceof FormData) {
-      data = [...body.entries()].reduce((object, pair) => {
-        object[pair[0]] = pair[1];
-        return object;
-      }, {});
+      for (const [key, value] of body.entries()) {
+        data[key] = value;
+      }
     } else {
       data = JSON.parse(body);
     }

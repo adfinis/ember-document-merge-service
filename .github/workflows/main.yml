@@ -44,8 +44,7 @@ jobs:
     steps:
     - name: Install Node
       uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node }}
+      with: { node-version: "${{ matrix.node }}" }
 
     - name: Checkout repository
       uses: actions/checkout@v1
@@ -63,6 +62,13 @@ jobs:
 
     - name: Ember tests
       uses: alexlafroscia/actions-ember-testing@v1.0.0
+      env: { COVERAGE: true }
+
+    - name: Run codecov
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: ./coverage/lcov.info
 
   try-one:
     name: Ember try:one
@@ -94,5 +100,4 @@ jobs:
 
     - name: Ember Scenario tests
       uses: alexlafroscia/actions-ember-testing@v1.0.0
-      with:
-        args: try:one ${{ matrix.scenario }}
+      with: { args: "try:one ${{ matrix.scenario }}" }
