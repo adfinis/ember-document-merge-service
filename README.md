@@ -2,9 +2,10 @@
 This addon contains Ember components that provide a UI for the 
 [document-merge-service](https://github.com/adfinis-sygroup/document-merge-service/).
 
-## Compatibility
-* Ember.js v2.18 or above
-* Ember CLI v2.13 or above
+## Project
+* Ember.js v3.8 or above
+* Repository: [ember-document-merge-service](https://github.com/adfinis-sygroup/ember-document-merge-service)
+* Maintainer: [Florian Mäder](mailto:florian.maeder@adfinis-sygroup.ch)
 
 ## Installation
 ```
@@ -23,20 +24,20 @@ export default AjaxService.extend({
 });
 ```
 
-### Usage
+## Usage
 The addon is divided into three components that can be included individually.
 
-#### Upload
+### Upload
 The upload component provides a form to select a file to upload and define a slug and label for the template. If the backend responds with an error, the message(s) will be added to the corresponding form elements.
 
-#### Delete
+### Delete
 The delete component provides a list with the existing templates. Each templates comes with a delete link and deletion is guarded by a confirmation dialog.
 
-#### Merge
+### Merge
 The merge component provides a dropdown to select from the existing templates which can then be merged with a data object.
 
 ## Contributing
 See the [Contributing](CONTRIBUTING.md) guide for details.
 
 ## License
-This project is licensed under the [MIT License](LICENSE.md).
+Copyright 2019, 2020 [Adfinis SyGroup AG](https://adfinis-sygroup.ch/) - Permission granted under the [LGPL-3.0-or-later](LICENSE).
